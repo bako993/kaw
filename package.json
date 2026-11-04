@@ -1,0 +1,9 @@
+{
+  "name": "kaw",
+  "private": true,
+  "engines": {
+    "node": ">=26 <27"
+  },
+  "scripts": {},
+  "packageManager": "pnpm@12.16.1"
+}
