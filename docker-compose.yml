@@ -1,0 +1,36 @@
+name: kaw
+
+x-postgres: &postgres
+  image: postgres:18-alpine
+  environment: &postgres-env
+    POSTGRES_USER: kaw
+    POSTGRES_PASSWORD: kaw
+  healthcheck:
+    test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}']
+    interval: 5s
+    timeout: 3s
+    retries: 10
+
+services:
+  db:
+    <<: *postgres
+    environment:
+      <<: *postgres-env
+      POSTGRES_DB: kaw
+    ports:
+      - '5440:5432'
+    volumes:
+      - db-data:/var/lib/postgresql
+
+  db-test:
+    <<: *postgres
+    environment:
+      <<: *postgres-env
+      POSTGRES_DB: kaw_test
+    ports:
+      - '5441:5432'
+    tmpfs:
+      - /var/lib/postgresql
+
+volumes:
+  db-data:
