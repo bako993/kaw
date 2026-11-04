@@ -2,6 +2,7 @@ export interface ServerConfig {
   readonly host: string;
   readonly port: number;
   readonly prettyLogs: boolean;
+  readonly databaseUrl: string;
 }
 
 const DEFAULT_HOST = '0.0.0.0';
@@ -13,6 +14,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): ServerConfig {
     host: env.HOST ?? DEFAULT_HOST,
     port: parsePort(env.PORT),
     prettyLogs: env.NODE_ENV !== 'production',
+    databaseUrl: requireValue(env, 'DATABASE_URL'),
   };
 }
 
@@ -29,4 +31,13 @@ function parsePort(value: string | undefined): number {
   }
 
   return port;
+}
+
+function requireValue(env: NodeJS.ProcessEnv, name: string): string {
+  const value = env[name];
+  if (value === undefined || value === '') {
+    throw new Error(`${name} is missing. Copy apps/api/.env.example to apps/api/.env`);
+  }
+
+  return value;
 }
