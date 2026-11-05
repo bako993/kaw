@@ -1,7 +1,7 @@
 import { buildApp } from './app.ts';
-import { loadConfig } from './config.ts';
-import { createDatabase } from './db/database.ts';
-import { pingDatabase } from './db/ping.ts';
+import { loadConfig } from './platform/config.ts';
+import { createDatabase } from './platform/db/database.ts';
+import { pingDatabase } from './platform/db/ping.ts';
 
 const config = loadConfig();
 const database = createDatabase(config.databaseUrl);

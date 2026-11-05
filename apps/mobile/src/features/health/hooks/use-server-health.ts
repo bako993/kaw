@@ -1,8 +1,9 @@
 import type { HealthResponse } from '@kaw/shared';
 import { useEffect, useState } from 'react';
 
-import { fetchHealth } from '@/api/fetch-health';
-import { env } from '@/config/env';
+import { env } from '@/platform/config/env';
+
+import { fetchHealth } from '../services/fetch-health';
 
 export type ServerHealth =
   | { readonly state: 'checking' }

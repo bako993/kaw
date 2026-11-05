@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import { useServerHealth, type ServerHealth } from '@/features/health/use-server-health';
+import { useServerHealth, type ServerHealth } from '@/features/health';
 
 function statusLabel(serverHealth: ServerHealth): string {
   switch (serverHealth.state) {

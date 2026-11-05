@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildApp } from '../app.ts';
+import { buildApp } from '../../app.ts';
 
 async function requestHealth(isDatabaseReachable: () => Promise<boolean>) {
   const app = await buildApp({ logger: false, isDatabaseReachable });

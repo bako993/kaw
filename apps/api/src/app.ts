@@ -1,6 +1,6 @@
 import { fastify, type FastifyInstance, type FastifyServerOptions } from 'fastify';
 
-import { healthRoutes } from './routes/health.ts';
+import { healthRoutes } from './modules/health/index.ts';
 
 export interface AppOptions {
   readonly logger: FastifyServerOptions['logger'];
