@@ -4,8 +4,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "js/ts.tsdk.path": "node_modules/typescript/lib",
-  "json.schemaDownload.trustedDomains": {
-    "https://railway.com/": true
-  }
+  "js/ts.tsdk.path": "node_modules/typescript/lib"
 }
