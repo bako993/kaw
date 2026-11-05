@@ -1,0 +1,28 @@
+{
+  "cli": {
+    "version": ">= 27.4.1",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "base": {
+      "node": "26.13.0",
+      "pnpm": "12.16.1"
+    },
+    "development": {
+      "extends": "base",
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "extends": "base",
+      "distribution": "internal"
+    },
+    "production": {
+      "extends": "base",
+      "autoIncrement": true
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

@@ -1,6 +1,9 @@
 packages:
   - 'apps/*'
   - 'packages/*'
+allowBuilds:
+  dtrace-provider: false
+  protobufjs: false
 minimumReleaseAgeExclude:
   - '@expo/cli@58.1.19'
   - '@expo/config-plugins@58.0.12'
@@ -28,3 +31,7 @@ minimumReleaseAgeExclude:
   - react-native-safe-area-context@5.11.1
 
 nodeLinker: hoisted
+
+peerDependencyRules:
+  allowedVersions:
+    '@expo/require-utils>typescript': '6'

@@ -1,16 +1,23 @@
 {
   "expo": {
-    "name": "mobile",
-    "slug": "mobile",
+    "name": "Kaw",
+    "slug": "kaw",
+    "owner": "bako.devsolutions",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/images/icon.png",
-    "scheme": "mobile",
+    "scheme": "kaw",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "bundleIdentifier": "com.bakodevsolutions.kaw",
+      "supportsTablet": true,
+      "icon": "./assets/expo.icon",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
+      "package": "com.bakodevsolutions.kaw",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -18,10 +25,6 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false
-    },
-    "web": {
-      "output": "server",
-      "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
       "expo-router",
@@ -37,6 +40,16 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "ba3c6d95-7b81-4bfd-84cb-d250bad942ce"
+      }
     }
   }
 }
