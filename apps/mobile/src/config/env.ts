@@ -1,9 +1,14 @@
-const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+const ENV_NAME = 'EXPO_PUBLIC_API_URL';
+const rawApiUrl = process.env.EXPO_PUBLIC_API_URL;
 
-if (apiUrl === undefined || apiUrl === '') {
-  throw new Error(
-    'EXPO_PUBLIC_API_URL is missing. Copy apps/mobile/.env.example to apps/mobile/.env',
-  );
+if (rawApiUrl === undefined || rawApiUrl === '') {
+  throw new Error(`${ENV_NAME} is missing. Copy apps/mobile/.env.example to apps/mobile/.env`);
 }
 
-export const env = { apiUrl } as const;
+if (!/^https?:\/\//.test(rawApiUrl)) {
+  throw new Error(`${ENV_NAME} must start with http:// or https://, got "${rawApiUrl}"`);
+}
+
+export const env = {
+  apiUrl: rawApiUrl.replace(/\/+$/, ''),
+} as const;
