@@ -23,9 +23,14 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Kaw</Text>
       <Text style={styles.status}>{statusLabel(serverHealth)}</Text>
-      <Link href="/lab" style={styles.link}>
-        Open Kaw lab
-      </Link>
+      <View style={styles.links}>
+        <Link href="/lab" style={styles.link}>
+          Open Kaw lab
+        </Link>
+        <Link href="/map-lab" style={styles.link}>
+          Open map lab
+        </Link>
+      </View>
     </View>
   );
 }
@@ -40,8 +45,8 @@ const styles = StyleSheet.create({
   },
   title: { fontSize: 32, fontWeight: '800', color: '#4A3F35' },
   status: { fontSize: 18, color: '#4A3F35' },
+  links: { flexDirection: 'row', gap: 12, marginTop: 12 },
   link: {
-    marginTop: 12,
     paddingHorizontal: 20,
     paddingVertical: 12,
     borderRadius: 999,

@@ -1,0 +1,7 @@
+{
+  "exportName": "silemaniGround",
+  "source": "design/cities/silemani/osm.geojson",
+  "output": "apps/mobile/src/features/journey/cities/silemani/silemani-ground.generated.ts",
+  "bounds": { "west": 45.39, "south": 35.52, "east": 45.485, "north": 35.595 },
+  "unitsPerDegree": 30000
+}
