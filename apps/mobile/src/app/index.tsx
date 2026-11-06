@@ -1,3 +1,4 @@
+import { Link } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { useServerHealth, type ServerHealth } from '@/features/health';
@@ -22,6 +23,9 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Kaw</Text>
       <Text style={styles.status}>{statusLabel(serverHealth)}</Text>
+      <Link href="/lab" style={styles.link}>
+        Open Kaw lab
+      </Link>
     </View>
   );
 }
@@ -36,4 +40,15 @@ const styles = StyleSheet.create({
   },
   title: { fontSize: 32, fontWeight: '800', color: '#4A3F35' },
   status: { fontSize: 18, color: '#4A3F35' },
+  link: {
+    marginTop: 12,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 999,
+    overflow: 'hidden',
+    backgroundColor: '#4A3F35',
+    color: '#FFF6E6',
+    fontSize: 16,
+    fontWeight: '700',
+  },
 });
