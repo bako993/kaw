@@ -10,6 +10,7 @@ import Animated, {
 import { useSound } from '@/features/audio';
 import { Kaw } from '@/features/kaw';
 import { useAppAudioMode } from '@/platform/audio/use-app-audio-mode';
+import { FrameRateBadge } from '@/platform/performance/FrameRateBadge';
 
 export default function LabScreen() {
   useAppAudioMode();
@@ -34,6 +35,7 @@ export default function LabScreen() {
           <Kaw pose="cheering" size={320} />
         </Animated.View>
       </Pressable>
+      <FrameRateBadge />
     </View>
   );
 }
