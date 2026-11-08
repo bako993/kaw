@@ -2,12 +2,12 @@
 const { withGradleProperties } = require('expo/config-plugins');
 
 /**
- * Android builds only: lets Gradle work on at most 2 parts at a time.
+ * Android builds only: lets Gradle work on 1 part at a time.
  * Compiling six native (C++) parts at once ran Expo's build machine out of memory
  * ("Gradle build daemon disappeared"). Fewer at a time is slower, but fits in memory.
  */
 const GRADLE_PROPERTIES = {
-  'org.gradle.workers.max': '2',
+  'org.gradle.workers.max': '1',
 };
 
 /** @type {import('expo/config-plugins').ConfigPlugin} */
