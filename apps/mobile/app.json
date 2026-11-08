@@ -36,7 +36,8 @@
           "imageWidth": 76
         }
       ],
-      "expo-audio"
+      "expo-audio",
+      "./plugins/with-android-build-limits.js"
     ],
     "experiments": {
       "typedRoutes": true,
