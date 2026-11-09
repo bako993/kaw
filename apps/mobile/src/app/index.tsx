@@ -30,6 +30,9 @@ export default function HomeScreen() {
         <Link href="/map-lab" style={styles.link}>
           Open map lab
         </Link>
+        <Link href="/words-lab" style={styles.link}>
+          Open words lab
+        </Link>
       </View>
     </View>
   );
@@ -45,7 +48,13 @@ const styles = StyleSheet.create({
   },
   title: { fontSize: 32, fontWeight: '800', color: '#4A3F35' },
   status: { fontSize: 18, color: '#4A3F35' },
-  links: { flexDirection: 'row', gap: 12, marginTop: 12 },
+  links: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: 12,
+    marginTop: 12,
+  },
   link: {
     paddingHorizontal: 20,
     paddingVertical: 12,

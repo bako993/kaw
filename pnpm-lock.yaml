@@ -322,7 +322,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/shared
 
-  tools/kaw-rig: {}
+  tools/kaw-rig:
+    dependencies:
+      '@kaw/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
 
 packages:
 
