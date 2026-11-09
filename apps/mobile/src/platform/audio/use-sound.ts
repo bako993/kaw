@@ -1,11 +1,12 @@
 import { useAudioPlayer } from 'expo-audio';
 import { useCallback } from 'react';
 
-import { SOUND_FILES, type SoundId } from '../model/sound-manifest';
+/** A sound file shipped inside the app, e.g. `require('@/assets/audio/word/hello.m4a')`. */
+export type SoundFile = number;
 
 /** Loads one sound ahead of time and returns a function that plays it from the start. */
-export function useSound(id: SoundId): () => void {
-  const player = useAudioPlayer(SOUND_FILES[id]);
+export function useSound(file: SoundFile): () => void {
+  const player = useAudioPlayer(file);
 
   return useCallback(() => {
     // Rewinding takes a moment. Play only once it's done; otherwise, after a sound

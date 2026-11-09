@@ -1,18 +1,55 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text } from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSequence,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 
-import { TOPICS, WordPicture, WORDS } from '@/features/content';
+import { TOPICS, useWordSound, WordPicture, WORDS, type WordId } from '@/features/content';
+import { useAppAudioMode } from '@/platform/audio/use-app-audio-mode';
 
 const topic = TOPICS['hello-and-me'];
 
+function WordCard({ wordId }: { readonly wordId: WordId }) {
+  const sayWord = useWordSound(wordId);
+  const bounce = useSharedValue(1);
+  const bounceStyle = useAnimatedStyle(() => ({ transform: [{ scale: bounce.get() }] }));
+  const word = WORDS[wordId];
+
+  const onPressIn = () => {
+    sayWord();
+    bounce.set(
+      withSequence(
+        withTiming(0.94, { duration: 90 }),
+        withSpring(1, { damping: 9, stiffness: 240 }),
+      ),
+    );
+  };
+
+  return (
+    <Pressable
+      onPressIn={onPressIn}
+      accessibilityRole="button"
+      accessibilityLabel={word.meaning.en}
+    >
+      <Animated.View style={[styles.card, bounceStyle]}>
+        <WordPicture wordId={wordId} size={140} />
+        <Text style={styles.kurdish}>{word.kurdish}</Text>
+        <Text style={styles.soundsLike}>{word.soundsLike}</Text>
+      </Animated.View>
+    </Pressable>
+  );
+}
+
 export default function WordsLabScreen() {
+  useAppAudioMode();
+
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.grid}>
       {topic.words['6-10'].map((wordId) => (
-        <View key={wordId} style={styles.card}>
-          <WordPicture wordId={wordId} size={140} />
-          <Text style={styles.kurdish}>{WORDS[wordId].kurdish}</Text>
-          <Text style={styles.soundsLike}>{WORDS[wordId].soundsLike}</Text>
-        </View>
+        <WordCard key={wordId} wordId={wordId} />
       ))}
     </ScrollView>
   );
