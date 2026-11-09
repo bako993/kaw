@@ -75,7 +75,7 @@ export function planSnapshot(
   return {
     rect: { x: left, y: top, width, height },
     pixelsPerUnit,
-    widthPx: Math.max(1, Math.round(width * pixelsPerUnit)),
-    heightPx: Math.max(1, Math.round(height * pixelsPerUnit)),
+    widthPx: Math.max(1, Math.floor(width * pixelsPerUnit)),
+    heightPx: Math.max(1, Math.floor(height * pixelsPerUnit)),
   };
 }
