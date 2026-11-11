@@ -8,7 +8,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { TOPICS, useWordSound, WordPicture, WORDS, type WordId } from '@/features/content';
-import { useAppAudioMode } from '@/platform/audio/use-app-audio-mode';
+import { colors, radius, space, textStyles } from '@/ui';
 
 const topic = TOPICS['hello-and-me'];
 
@@ -44,8 +44,6 @@ function WordCard({ wordId }: { readonly wordId: WordId }) {
 }
 
 export default function WordsLabScreen() {
-  useAppAudioMode();
-
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.grid}>
       {topic.words['6-10'].map((wordId) => (
@@ -56,22 +54,22 @@ export default function WordsLabScreen() {
 }
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: '#FFF6E6' },
+  screen: { flex: 1, backgroundColor: colors.backgroundTop },
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    gap: 16,
-    padding: 24,
+    gap: space[4],
+    padding: space[5],
   },
   card: {
     alignItems: 'center',
-    gap: 4,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 24,
-    backgroundColor: '#FFFFFF',
+    gap: space[1],
+    paddingVertical: space[3],
+    paddingHorizontal: space[4],
+    borderRadius: radius.large,
+    backgroundColor: colors.paper,
   },
-  kurdish: { fontSize: 24, fontWeight: '700', color: '#4A3F35', writingDirection: 'rtl' },
-  soundsLike: { fontSize: 14, color: '#8A7A6A' },
+  kurdish: { ...textStyles.kurdishWord, writingDirection: 'rtl' },
+  soundsLike: textStyles.latinSmall,
 });

@@ -1,11 +1,10 @@
 import { useAudioPlayer } from 'expo-audio';
 import { useCallback } from 'react';
 
-/** A sound file shipped inside the app, e.g. `require('@/assets/audio/word/hello.m4a')`. */
-export type SoundFile = number;
+import type { BundledAsset } from '@/platform/assets/bundled-asset';
 
 /** Loads one sound ahead of time and returns a function that plays it from the start. */
-export function useSound(file: SoundFile): () => void {
+export function useSound(file: BundledAsset): () => void {
   const player = useAudioPlayer(file);
 
   return useCallback(() => {

@@ -1,9 +1,9 @@
-import type { SoundFile } from '@/platform/audio/use-sound';
+import { bundledAsset, type BundledAsset } from '@/platform/assets/bundled-asset';
 
 import type { WordId } from '../words';
 
 /** A soft "boop" for words not recorded yet, so you can hear which ones still need recording. */
-const NOT_RECORDED_YET: SoundFile = require('@/assets/audio/placeholder.m4a');
+const NOT_RECORDED_YET = bundledAsset(require('@/assets/audio/placeholder.m4a'));
 
 /**
  * Every word's sound: word ID → file in assets/audio/word/.
@@ -11,7 +11,7 @@ const NOT_RECORDED_YET: SoundFile = require('@/assets/audio/placeholder.m4a');
  * After recording a word, change its line from NOT_RECORDED_YET to its file.
  */
 export const WORD_SOUNDS = {
-  hello: require('@/assets/audio/word/hello.m4a'),
+  hello: bundledAsset(require('@/assets/audio/word/hello.m4a')),
   welcome: NOT_RECORDED_YET,
   'thank-you': NOT_RECORDED_YET,
   yes: NOT_RECORDED_YET,
@@ -21,4 +21,4 @@ export const WORD_SOUNDS = {
   'whats-your-name': NOT_RECORDED_YET,
   'my-name-is': NOT_RECORDED_YET,
   goodbye: NOT_RECORDED_YET,
-} satisfies Record<WordId, SoundFile>;
+} satisfies Record<WordId, BundledAsset>;

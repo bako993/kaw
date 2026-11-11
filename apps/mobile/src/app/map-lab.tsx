@@ -1,16 +1,15 @@
-import { StyleSheet, Text } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { JourneyMap } from '@/features/journey';
 import { FrameRateBadge } from '@/platform/performance/FrameRateBadge';
 
 export default function MapLabScreen() {
   return (
-    <GestureHandlerRootView style={styles.root}>
+    <View style={styles.root}>
       <JourneyMap cityId="silemani" progress={2} />
       <FrameRateBadge />
       <Text style={styles.credit}>© OpenStreetMap</Text>
-    </GestureHandlerRootView>
+    </View>
   );
 }
 

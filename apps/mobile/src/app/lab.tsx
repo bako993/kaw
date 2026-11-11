@@ -9,11 +9,9 @@ import Animated, {
 
 import { useWordSound } from '@/features/content';
 import { Kaw } from '@/features/kaw';
-import { useAppAudioMode } from '@/platform/audio/use-app-audio-mode';
 import { FrameRateBadge } from '@/platform/performance/FrameRateBadge';
 
 export default function LabScreen() {
-  useAppAudioMode();
   const sayHello = useWordSound('hello');
   const bounce = useSharedValue(1);
   const bounceStyle = useAnimatedStyle(() => ({ transform: [{ scale: bounce.get() }] }));

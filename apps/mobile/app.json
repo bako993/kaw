@@ -11,6 +11,7 @@
     "ios": {
       "bundleIdentifier": "com.bakodevsolutions.kaw",
       "supportsTablet": true,
+      "requireFullScreen": true,
       "icon": "./assets/expo.icon",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
@@ -37,6 +38,17 @@
         }
       ],
       "expo-audio",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Vazirmatn-Medium.ttf",
+            "./assets/fonts/Vazirmatn-ExtraBold.ttf",
+            "./assets/fonts/Nunito-SemiBold.ttf",
+            "./assets/fonts/Nunito-ExtraBold.ttf"
+          ]
+        }
+      ],
       "./plugins/with-android-build-limits.js"
     ],
     "experiments": {

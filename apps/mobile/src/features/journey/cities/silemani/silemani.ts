@@ -1,3 +1,4 @@
+import { bundledAsset } from '@/platform/assets/bundled-asset';
 import type { City } from '../../model/city';
 
 import { silemaniGround } from './silemani-ground.generated';
@@ -45,7 +46,7 @@ export const silemani: City = {
       x: 1236,
       y: 1120,
       width: 300,
-      image: require('@/assets/journey/silemani/grand-mosque.png'),
+      image: bundledAsset(require('@/assets/journey/silemani/grand-mosque.png')),
       site: { width: 480, height: 340 },
     },
     {
@@ -53,7 +54,7 @@ export const silemani: City = {
       x: 410,
       y: 696,
       width: 122,
-      image: require('@/assets/journey/silemani/grand-millennium.png'),
+      image: bundledAsset(require('@/assets/journey/silemani/grand-millennium.png')),
       site: { width: 230, height: 180 },
     },
   ],
