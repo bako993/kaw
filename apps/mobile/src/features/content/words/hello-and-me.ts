@@ -6,10 +6,10 @@ export const HELLO_AND_ME_WORDS = {
     soundsLike: 'slaw',
     meaning: { en: 'hello', nl: 'hallo' },
   },
-  welcome: {
-    kurdish: 'بەخێربێیت',
-    soundsLike: 'bexêr bêyt',
-    meaning: { en: 'welcome', nl: 'welkom' },
+  sorry: {
+    kurdish: 'ببورە',
+    soundsLike: 'bibûre',
+    meaning: { en: 'sorry', nl: 'sorry' },
   },
   'thank-you': {
     kurdish: 'سوپاس',

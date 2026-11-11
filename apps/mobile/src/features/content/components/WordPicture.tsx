@@ -1,5 +1,4 @@
-import { Canvas, ImageSVG, useSVG } from '@shopify/react-native-skia';
-import { View } from 'react-native';
+import { Image } from 'expo-image';
 
 import { WORD_PICTURES } from '../pictures';
 import { WORDS, type WordId } from '../words';
@@ -9,22 +8,18 @@ export interface WordPictureProps {
   readonly size: number;
 }
 
-/** One word's picture, drawn by Skia straight from its SVG, so it stays sharp at any size. */
+/** One word's 3D picture. Shown smaller than its file, so it always stays sharp. */
 export function WordPicture({ wordId, size }: WordPictureProps) {
-  const svg = useSVG(WORD_PICTURES[wordId]);
-  const box = { width: size, height: size };
-
-  // The screen-reader label uses the English meaning until the app languages arrive (M3).
+  // The screen-reader label uses the English meaning until the app languages arrive (M3d).
   return (
-    <View
+    <Image
+      source={WORD_PICTURES[wordId]}
+      style={{ width: size, height: size }}
+      contentFit="contain"
+      transition={180}
       accessible
       accessibilityRole="image"
       accessibilityLabel={WORDS[wordId].meaning.en}
-      style={box}
-    >
-      <Canvas style={box}>
-        <ImageSVG svg={svg} x={0} y={0} width={size} height={size} />
-      </Canvas>
-    </View>
+    />
   );
 }

@@ -6,7 +6,7 @@ export const TOPICS = {
     words: {
       '6-10': [
         'hello',
-        'welcome',
+        'sorry',
         'thank-you',
         'yes',
         'no',

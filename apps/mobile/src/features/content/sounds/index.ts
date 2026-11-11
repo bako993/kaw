@@ -12,7 +12,7 @@ const NOT_RECORDED_YET = bundledAsset(require('@/assets/audio/placeholder.m4a'))
  */
 export const WORD_SOUNDS = {
   hello: bundledAsset(require('@/assets/audio/word/hello.m4a')),
-  welcome: NOT_RECORDED_YET,
+  sorry: NOT_RECORDED_YET,
   'thank-you': NOT_RECORDED_YET,
   yes: NOT_RECORDED_YET,
   no: NOT_RECORDED_YET,
