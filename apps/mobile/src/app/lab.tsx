@@ -1,38 +1,36 @@
-import { Pressable, StyleSheet, View } from 'react-native';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withSequence,
-  withSpring,
-  withTiming,
-} from 'react-native-reanimated';
+import { useState } from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { useWordSound } from '@/features/content';
-import { Kaw } from '@/features/kaw';
+import { Kaw, type KawPose } from '@/features/kaw';
 import { FrameRateBadge } from '@/platform/performance/FrameRateBadge';
+import { colors, textStyles } from '@/ui';
+
+const POSES: readonly KawPose[] = [
+  'happy',
+  'waving',
+  'speaking',
+  'listening',
+  'pointing',
+  'cheering',
+];
 
 export default function LabScreen() {
   const sayHello = useWordSound('hello');
-  const bounce = useSharedValue(1);
-  const bounceStyle = useAnimatedStyle(() => ({ transform: [{ scale: bounce.get() }] }));
+  const [poseIndex, setPoseIndex] = useState(0);
+  const pose = POSES[poseIndex % POSES.length] ?? 'happy';
 
-  const onPressIn = () => {
+  const showNextPose = () => {
     sayHello();
-    bounce.set(
-      withSequence(
-        withTiming(1.08, { duration: 110 }),
-        withSpring(1, { damping: 8, stiffness: 220 }),
-      ),
-    );
+    setPoseIndex((index) => index + 1);
   };
 
   return (
     <View style={styles.container}>
-      <Pressable onPressIn={onPressIn} accessibilityRole="button" accessibilityLabel="Kaw">
-        <Animated.View style={bounceStyle}>
-          <Kaw pose="cheering" size={320} />
-        </Animated.View>
+      <Pressable onPress={showNextPose} accessibilityRole="button" accessibilityLabel="Kaw">
+        <Kaw pose={pose} size={300} />
       </Pressable>
+      <Text style={styles.poseName}>{pose}</Text>
       <FrameRateBadge />
     </View>
   );
@@ -43,6 +41,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FFF6E6',
+    backgroundColor: colors.backgroundTop,
   },
+  poseName: textStyles.latinLabel,
 });
