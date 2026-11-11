@@ -49,7 +49,8 @@
           ]
         }
       ],
-      "./plugins/with-android-build-limits.js"
+      "./plugins/with-android-build-limits.js",
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true,
