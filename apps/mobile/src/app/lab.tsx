@@ -19,6 +19,12 @@ const POSES: readonly KawPose[] = [
   'pointing',
   'cheering',
   'thinking',
+  'pencil',
+  'magnifier',
+  'explorer',
+  'nightcap',
+  'reading',
+  'sleeping',
 ];
 
 export default function LabScreen() {

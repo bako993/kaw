@@ -17,6 +17,7 @@ export const KAW_FEET_LINE = 992 / 1024;
 /**
  * Kaw's 3D poses in assets/kaw/. All share one framing (same size, eyes and feet
  * on the same lines), so switching between poses never makes him jump.
+ * Exception: `sleeping` lies down, so only his ground line matches.
  */
 export const KAW_POSES = {
   happy: { file: bundledAsset(require('@/assets/kaw/happy.webp')), entrance: 'fade' },
@@ -31,6 +32,12 @@ export const KAW_POSES = {
   pointing: { file: bundledAsset(require('@/assets/kaw/pointing.webp')), entrance: 'fade' },
   cheering: { file: bundledAsset(require('@/assets/kaw/cheering.webp')), entrance: 'hop' },
   thinking: { file: bundledAsset(require('@/assets/kaw/thinking.webp')), entrance: 'fade' },
+  pencil: { file: bundledAsset(require('@/assets/kaw/pencil.webp')), entrance: 'fade' },
+  magnifier: { file: bundledAsset(require('@/assets/kaw/magnifier.webp')), entrance: 'fade' },
+  explorer: { file: bundledAsset(require('@/assets/kaw/explorer.webp')), entrance: 'fade' },
+  nightcap: { file: bundledAsset(require('@/assets/kaw/nightcap.webp')), entrance: 'fade' },
+  reading: { file: bundledAsset(require('@/assets/kaw/reading.webp')), entrance: 'fade' },
+  sleeping: { file: bundledAsset(require('@/assets/kaw/sleeping.webp')), entrance: 'fade' },
 } as const satisfies Record<string, KawPoseArt>;
 
 export type KawPose = keyof typeof KAW_POSES;
