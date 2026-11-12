@@ -16,9 +16,14 @@ export const colors = {
   actionEdge: '#C77A10',
   onAction: '#5A3200',
 
+  frostTop: 'rgba(255, 255, 255, 0.82)',
+  frostBottom: 'rgba(255, 255, 255, 0.38)',
+  frostEdge: 'rgba(255, 255, 255, 0.95)',
+
   success: '#2FA36B',
   successLight: '#5BC184',
   successEdge: '#23784A',
+  successHalo: 'rgba(47, 163, 107, 0.16)',
 
   white: '#FFFFFF',
 } as const;

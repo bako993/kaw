@@ -33,6 +33,9 @@ export default function HomeScreen() {
         <Link href="/words-lab" style={styles.link}>
           Open words lab
         </Link>
+        <Link href="/lesson-lab" style={styles.link}>
+          Open lesson lab
+        </Link>
       </View>
     </View>
   );
