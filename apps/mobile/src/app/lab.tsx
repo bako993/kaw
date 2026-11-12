@@ -8,11 +8,17 @@ import { colors, textStyles } from '@/ui';
 
 const POSES: readonly KawPose[] = [
   'happy',
+  'curious',
+  'proud',
+  'gentle',
+  'surprised',
+  'sleepy',
   'waving',
-  'speaking',
   'listening',
+  'speaking',
   'pointing',
   'cheering',
+  'thinking',
 ];
 
 export default function LabScreen() {

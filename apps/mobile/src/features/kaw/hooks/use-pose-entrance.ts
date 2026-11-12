@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import {
+  interpolate,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
@@ -14,7 +15,10 @@ import { KAW_POSES, type KawPose } from '../poses';
 
 const HOP_HEIGHT = 26;
 
-/** Plays a pose's entrance (a happy hop for cheering) each time Kaw switches to it. */
+/**
+ * Plays a pose's entrance (a happy hop for cheering) each time Kaw switches to it.
+ * Returns his lift and a matching floor shadow that shrinks and fades as he rises.
+ */
 export function usePoseEntrance(pose: KawPose) {
   const lift = useSharedValue(0);
   const reduceMotion = useReducedMotion();
@@ -29,5 +33,15 @@ export function usePoseEntrance(pose: KawPose) {
     );
   }, [pose, lift, reduceMotion]);
 
-  return useAnimatedStyle(() => ({ transform: [{ translateY: lift.get() }] }));
+  const liftStyle = useAnimatedStyle(() => ({ transform: [{ translateY: lift.get() }] }));
+
+  const shadowStyle = useAnimatedStyle(() => {
+    const rise = Math.min(1, Math.abs(lift.get()) / HOP_HEIGHT);
+    return {
+      opacity: interpolate(rise, [0, 1], [1, 0.45]),
+      transform: [{ scale: interpolate(rise, [0, 1], [1, 0.7]) }],
+    };
+  });
+
+  return { liftStyle, shadowStyle };
 }

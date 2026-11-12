@@ -9,7 +9,7 @@ import {
   withTiming,
 } from 'react-native-reanimated';
 
-const BREATH_MS = 1700;
+const BREATH_MS = 1800;
 
 /** A slow, soft breath while Kaw stands still. Stays still when "reduce motion" is on. */
 export function useIdleBreathing() {
@@ -34,9 +34,9 @@ export function useIdleBreathing() {
     const amount = breath.get();
     return {
       transform: [
-        { translateY: -3 * amount },
-        { scaleX: 1 + 0.012 * amount },
-        { scaleY: 1 - 0.008 * amount },
+        { translateY: -6 * amount },
+        { scaleX: 1 + 0.024 * amount },
+        { scaleY: 1 - 0.016 * amount },
       ],
     };
   });
