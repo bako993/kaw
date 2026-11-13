@@ -20,7 +20,7 @@ const ICONS = {
     shape('M15.5 9a4 4 0 0 1 0 6', 2.3),
     shape('M18.5 6.5a7.5 7.5 0 0 1 0 11', 2.3),
   ],
-  /** Points left: "forward" in Kurdish (right to left). */
+  /** "Forward" in Kurdish: points left. Pass `mirrored` for left-to-right languages. */
   next: [shape('M14 6l-6 6 6 6', 3.2)],
   check: [shape('M5 12.5l4.5 4.5L19 7.5', 3.6)],
   star: [
@@ -36,12 +36,17 @@ export interface IconProps {
   readonly color: string;
   /** Outline colour for filled shapes (e.g. the star's darker edge). Defaults to `color`. */
   readonly outline?: string;
+  /** Flips the icon left ↔ right (e.g. "next" for languages read left to right). */
+  readonly mirrored?: boolean;
 }
 
 /** A small decorative icon. The button or chip around it carries the screen-reader label. */
-export function Icon({ name, size, color, outline = color }: IconProps) {
+export function Icon({ name, size, color, outline = color, mirrored = false }: IconProps) {
   return (
-    <Canvas style={{ width: size, height: size }} pointerEvents="none">
+    <Canvas
+      style={{ width: size, height: size, transform: [{ scaleX: mirrored ? -1 : 1 }] }}
+      pointerEvents="none"
+    >
       <Group transform={[{ scale: size / 24 }]}>
         {ICONS[name].map((part, index) => (
           <Group key={index}>

@@ -7,6 +7,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useWordSound, WordPicture, WORDS, type WordId } from '@/features/content';
 import { Kaw } from '@/features/kaw';
 import {
+  formatNumber,
+  formatText,
+  isRightToLeft,
+  useLanguage,
+  type AppLanguage,
+} from '@/platform/language';
+import {
   Chip,
   ChunkyButton,
   colors,
@@ -24,6 +31,13 @@ const CHOICES: readonly WordId[] = ['hello', 'thank-you', 'goodbye'];
 const TARGET: WordId = 'thank-you';
 const KAW_SIZE = 230;
 const TOP_BAR = 72;
+const STEPS = 8;
+
+/** What a screen reader says for a picture: the Kurdish word, or its meaning. */
+function wordLabel(wordId: WordId, language: AppLanguage): string {
+  const word = WORDS[wordId];
+  return language === 'ckb' ? word.kurdish : word.meaning[language];
+}
 
 function tileStateFor(wordId: WordId, solved: boolean, wrong: readonly WordId[]): TileState {
   if (solved) return wordId === TARGET ? 'right' : 'dim';
@@ -32,11 +46,18 @@ function tileStateFor(wordId: WordId, solved: boolean, wrong: readonly WordId[])
 
 export default function LessonLabScreen() {
   const router = useRouter();
+  const { language, texts } = useLanguage();
+  const t = texts.lesson;
+  const readsRightToLeft = isRightToLeft(language);
+  const titleStyle = readsRightToLeft ? textStyles.kurdishTitle : textStyles.latinTitle;
+  const labelStyle = readsRightToLeft ? textStyles.kurdishLabel : textStyles.latinLabel;
   const insets = useSafeAreaInsets();
   const window = useWindowDimensions();
   const sayTarget = useWordSound(TARGET);
   const [solved, setSolved] = useState(false);
   const [wrong, setWrong] = useState<readonly WordId[]>([]);
+  const step = solved ? 4 : 3;
+  const stars = solved ? 13 : 12;
 
   useEffect(() => {
     sayTarget();
@@ -67,18 +88,22 @@ export default function LessonLabScreen() {
       <Stack.Screen options={{ headerShown: false }} />
       <View style={[styles.screen, { paddingLeft: insets.left, paddingRight: insets.right }]}>
         <View style={styles.topBar}>
-          <ChunkyButton kind="icon" accessibilityLabel="Close lesson" onPress={router.back}>
+          <ChunkyButton kind="icon" accessibilityLabel={t.close} onPress={router.back}>
             <Icon name="close" size={18} color={colors.onAction} />
           </ChunkyButton>
-          <Text style={styles.title}>گوێ بگرە و بیدۆزەرەوە</Text>
+          <Text style={titleStyle}>{t.listenAndFind}</Text>
           <View style={styles.chips}>
-            <Chip accessibilityLabel={solved ? 'Step 4 of 8' : 'Step 3 of 8'}>
-              <Meter progress={solved ? 4 / 8 : 3 / 8} />
-              <Text style={textStyles.latinLabel}>{solved ? '4/8' : '3/8'}</Text>
+            <Chip
+              accessibilityLabel={formatText(t.stepOf, { current: step, total: STEPS }, language)}
+            >
+              <Meter progress={step / STEPS} />
+              <Text style={labelStyle}>
+                {formatText('{current}/{total}', { current: step, total: STEPS }, language)}
+              </Text>
             </Chip>
-            <Chip accessibilityLabel="Stars">
+            <Chip accessibilityLabel={formatText(t.stars, { count: stars }, language)}>
               <Icon name="star" size={22} color={colors.action} outline={colors.actionEdge} />
-              <Text style={textStyles.latinLabel}>{solved ? 13 : 12}</Text>
+              <Text style={labelStyle}>{formatNumber(stars, language)}</Text>
             </Chip>
           </View>
         </View>
@@ -90,7 +115,7 @@ export default function LessonLabScreen() {
                 key={wordId}
                 state={tileStateFor(wordId, solved, wrong)}
                 width={tileWidth}
-                accessibilityLabel={WORDS[wordId].meaning.en}
+                accessibilityLabel={wordLabel(wordId, language)}
                 onPress={() => {
                   choose(wordId);
                 }}
@@ -104,18 +129,19 @@ export default function LessonLabScreen() {
             <View style={styles.hostAction}>
               {solved ? (
                 <Animated.View key="next" entering={FadeIn.delay(300)} exiting={FadeOut}>
-                  <ChunkyButton kind="pill" accessibilityLabel="Next" onPress={restart}>
-                    <Text style={styles.pillText}>دواتر</Text>
-                    <Icon name="next" size={20} color={colors.onAction} />
+                  <ChunkyButton kind="pill" accessibilityLabel={t.next} onPress={restart}>
+                    <Text style={[titleStyle, styles.onAction]}>{t.next}</Text>
+                    <Icon
+                      name="next"
+                      size={20}
+                      color={colors.onAction}
+                      mirrored={!readsRightToLeft}
+                    />
                   </ChunkyButton>
                 </Animated.View>
               ) : (
                 <Animated.View key="sound" entering={FadeIn} exiting={FadeOut}>
-                  <ChunkyButton
-                    kind="sound"
-                    accessibilityLabel="Hear the word again"
-                    onPress={sayTarget}
-                  >
+                  <ChunkyButton kind="sound" accessibilityLabel={t.hearAgain} onPress={sayTarget}>
                     <Icon name="sound" size={30} color={colors.onAction} />
                   </ChunkyButton>
                 </Animated.View>
@@ -138,7 +164,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: space[5],
     paddingTop: space[3],
   },
-  title: { ...textStyles.kurdishTitle, writingDirection: 'rtl' },
   chips: { flexDirection: 'row', gap: space[3] },
   stage: {
     flex: 1,
@@ -151,5 +176,5 @@ const styles = StyleSheet.create({
   choices: { flexDirection: 'row', alignItems: 'flex-end', gap: space[5] },
   host: { alignItems: 'center' },
   hostAction: { position: 'absolute', left: 0, top: -space[3] },
-  pillText: { ...textStyles.kurdishTitle, color: colors.onAction },
+  onAction: { color: colors.onAction },
 });
