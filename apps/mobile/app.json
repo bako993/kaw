@@ -4,7 +4,7 @@
     "slug": "kaw",
     "owner": "bako.devsolutions",
     "version": "1.0.0",
-    "orientation": "default",
+    "orientation": "landscape",
     "icon": "./assets/images/icon.png",
     "scheme": "kaw",
     "userInterfaceStyle": "automatic",
@@ -50,6 +50,8 @@
         }
       ],
       "./plugins/with-android-build-limits.js",
+      "./plugins/with-android-no-rtl.js",
+      "./plugins/with-android-sideways.js",
       "expo-sqlite"
     ],
     "experiments": {
